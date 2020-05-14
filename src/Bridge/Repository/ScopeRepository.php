@@ -38,8 +38,12 @@ class ScopeRepository implements ScopeRepositoryInterface, EventDispatcherInterf
     /**
      * @inheritDoc
      */
-    public function finalizeScopes(array $scopes, $grantType, ClientEntityInterface $clientEntity, $userIdentifier = null)
-    {
+    public function finalizeScopes(
+        array $scopes,
+        $grantType,
+        ClientEntityInterface $clientEntity,
+        $userIdentifier = null
+    ) {
         $result = $this->dispatchEvent('OAuthServer.finalizeScopes', compact(
             'scopes',
             'grantType',

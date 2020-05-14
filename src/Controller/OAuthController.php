@@ -99,7 +99,8 @@ class OAuthController extends AppController
 
             $this->dispatchEvent('OAuthServer.beforeAuthorize', [$authRequest]);
 
-            if ($userId = $this->Auth->user($this->OAuth->getPrimaryKey())) {
+            $userId = $this->Auth->user($this->OAuth->getPrimaryKey());
+            if ($userId) {
                 $authRequest->setUser(new User($userId));
             }
 

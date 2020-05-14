@@ -148,6 +148,8 @@ class GrantFactory
         return $this->createDefault($grant);
     }
 
+    //phpcs:disable SlevomatCodingStandard.Classes.UnusedPrivateElements
+
     /**
      * @return \League\OAuth2\Server\Grant\PasswordGrant
      */
@@ -187,4 +189,6 @@ class GrantFactory
 
         return new $className();
     }
+
+    // phpcs:enable
 }

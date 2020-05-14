@@ -32,8 +32,12 @@ class UserRepository implements UserRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function getUserEntityByUserCredentials($username, $password, $grantType, ClientEntityInterface $clientEntity)
-    {
+    public function getUserEntityByUserCredentials(
+        $username,
+        $password,
+        $grantType,
+        ClientEntityInterface $clientEntity
+    ) {
         $user = $this->finder->findUser($username, $password);
 
         return $user ? new User($user->get($this->finder->getPrimaryKey())) : null;
