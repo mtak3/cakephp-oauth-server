@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace OAuthServer\Test\TestCase\Controller\Component;
 
-use Cake\Controller\ComponentRegistry;
 use Cake\Controller\Component\AuthComponent;
+use Cake\Controller\ComponentRegistry;
 use Cake\Controller\Controller;
 use Cake\Core\Configure;
 use Cake\Http\Response;

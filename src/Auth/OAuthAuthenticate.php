@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace OAuthServer\Auth;
 
@@ -12,19 +13,18 @@ use Cake\Http\ServerRequest;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\ResourceServer;
 use OAuthServer\Bridge\ResourceServerFactory;
-use Psr\Http\Message\ServerRequestInterface;
 
 class OAuthAuthenticate extends BaseAuthenticate
 {
     /**
-     * @var ResourceServer
+     * @var \League\OAuth2\Server\ResourceServer
      */
     protected $Server;
 
     /**
      * Exception that was thrown by oauth server
      *
-     * @var OAuthServerException
+     * @var \League\OAuth2\Server\Exception\OAuthServerException
      */
     protected $_exception;
 
@@ -44,7 +44,7 @@ class OAuthAuthenticate extends BaseAuthenticate
     ];
 
     /**
-     * @param ComponentRegistry $registry Component registry
+     * @param \Cake\Controller\ComponentRegistry $registry Component registry
      * @param array $config Config array
      */
     public function __construct(ComponentRegistry $registry, $config)
@@ -59,7 +59,7 @@ class OAuthAuthenticate extends BaseAuthenticate
     }
 
     /**
-     * @return ResourceServer
+     * @return \League\OAuth2\Server\ResourceServer
      */
     protected function getServer(): ResourceServer
     {
@@ -75,7 +75,7 @@ class OAuthAuthenticate extends BaseAuthenticate
     }
 
     /**
-     * @param ResourceServer $Server the ResourceServer instance
+     * @param \League\OAuth2\Server\ResourceServer $Server the ResourceServer instance
      * @return void
      */
     public function setServer(ResourceServer $Server): void
@@ -86,8 +86,8 @@ class OAuthAuthenticate extends BaseAuthenticate
     /**
      * Authenticate a user based on the request information.
      *
-     * @param ServerRequest $request Request to get authentication information from.
-     * @param Response $response A response object that can have headers added.
+     * @param \Cake\Http\ServerRequest $request Request to get authentication information from.
+     * @param \Cake\Http\Response $response A response object that can have headers added.
      * @return mixed
      */
     public function authenticate(ServerRequest $request, Response $response)
@@ -96,8 +96,8 @@ class OAuthAuthenticate extends BaseAuthenticate
     }
 
     /**
-     * @param ServerRequest $request Request to get authentication information from.
-     * @param Response $response A response object that can have headers added.
+     * @param \Cake\Http\ServerRequest $request Request to get authentication information from.
+     * @param \Cake\Http\Response $response A response object that can have headers added.
      * @return bool|void
      */
     public function unauthenticated(ServerRequest $request, Response $response)
@@ -115,7 +115,7 @@ class OAuthAuthenticate extends BaseAuthenticate
     }
 
     /**
-     * @param ServerRequest|ServerRequestInterface $request Request object
+     * @param \Cake\Http\ServerRequest|\OAuthServer\Auth\ServerRequestInterface $request Request object
      * @return array|bool|mixed
      */
     public function getUser(ServerRequest $request)

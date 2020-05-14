@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace OAuthServer\Model\Table;
 
 use Cake\ORM\Table;

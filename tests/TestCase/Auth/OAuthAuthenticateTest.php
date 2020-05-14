@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace OAuthServer\Test\TestCase\Auth;
 
@@ -13,7 +14,6 @@ use League\OAuth2\Server\CryptKey;
 use OAuthServer\Auth\OAuthAuthenticate;
 use OAuthServer\Model\Entity\AccessToken;
 use OAuthServer\Model\Entity\Client;
-use PHPUnit\Framework\MockObject\MockObject;
 
 class OAuthAuthenticateTest extends TestCase
 {

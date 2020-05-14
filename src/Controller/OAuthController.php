@@ -1,22 +1,21 @@
 <?php
+declare(strict_types=1);
 
 namespace OAuthServer\Controller;
 
-use Cake\Controller\Controller;
 use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\Http\Exception\HttpException;
 use Cake\Http\Response;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use OAuthServer\Bridge\Entity\User;
-use OAuthServer\Controller\Component\OAuthComponent;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 
 /**
  * Class OAuthController
  *
- * @property OAuthComponent $OAuth
+ * @property \OAuthServer\Controller\Component\OAuthComponent $OAuth
  * @mixin Controller
  */
 class OAuthController extends AppController
@@ -53,8 +52,8 @@ class OAuthController extends AppController
     /**
      * on Controller.initialize
      *
-     * @param Event $event the event
-     * @return Response|null
+     * @param \Cake\Event\Event $event the event
+     * @return \Cake\Http\Response|null
      */
     public function beforeFilter(Event $event): ?Response
     {
@@ -90,7 +89,7 @@ class OAuthController extends AppController
     }
 
     /**
-     * @return Response|ResponseInterface|void
+     * @return \Cake\Http\Response|\Psr\Http\Message\ResponseInterface|void
      */
     public function authorize()
     {
@@ -147,7 +146,7 @@ class OAuthController extends AppController
     }
 
     /**
-     * @return Response|ResponseInterface|null
+     * @return \Cake\Http\Response|\Psr\Http\Message\ResponseInterface|null
      */
     public function accessToken()
     {

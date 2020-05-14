@@ -1,9 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace OAuthServer\Action;
 
 use Crud\Action\BaseAction;
-use Crud\Event\Subject;
 use Crud\Traits\RedirectTrait;
 
 class LogoutAction extends BaseAction

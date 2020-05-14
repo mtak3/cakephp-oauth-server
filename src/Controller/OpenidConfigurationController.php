@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace OAuthServer\Controller;
 
@@ -8,12 +9,11 @@ use Cake\Core\Configure;
 use Cake\Routing\Router;
 use Cake\Utility\Hash;
 use OAuthServer\Bridge\GrantTypes;
-use OAuthServer\Controller\Component\OAuthComponent;
 
 /**
  * Class OpenidConfigurationController
  *
- * @property OAuthComponent $OAuth
+ * @property \OAuthServer\Controller\Component\OAuthComponent $OAuth
  */
 class OpenidConfigurationController extends Controller
 {

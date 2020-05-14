@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace OAuthServer\Test\TestCase\Controller;
 
@@ -14,9 +15,6 @@ use Cake\TestSuite\IntegrationTestCase;
 use Defuse\Crypto\Key;
 use League\OAuth2\Server\CryptTrait;
 use OAuthServer\Auth\OAuthAuthenticate;
-use OAuthServer\Model\Table\AccessTokensTable;
-use OAuthServer\Model\Table\AuthCodesTable;
-use OAuthServer\Model\Table\RefreshTokensTable;
 
 class IntegrationTest extends IntegrationTestCase
 {

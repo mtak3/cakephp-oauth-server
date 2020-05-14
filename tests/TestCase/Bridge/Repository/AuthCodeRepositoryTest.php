@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace OAuthServer\Test\TestCase\Bridge\Repository;
 
@@ -12,7 +13,6 @@ use OAuthServer\Bridge\Repository\ClientRepository;
 use OAuthServer\Bridge\Repository\ScopeRepository;
 use OAuthServer\Model\Entity\AuthCode;
 use OAuthServer\Model\Entity\Scope;
-use OAuthServer\Model\Table\AuthCodesTable;
 
 class AuthCodeRepositoryTest extends TestCase
 {

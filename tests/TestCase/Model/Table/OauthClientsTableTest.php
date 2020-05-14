@@ -1,10 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace OAuthServer\Test\TestCase\Model\Table;
 
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
-use OAuthServer\Model\Table\OauthClientsTable;
 
 class OauthClientsTableTest extends TestCase
 {

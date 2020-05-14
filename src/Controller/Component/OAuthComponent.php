@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace OAuthServer\Controller\Component;
 
@@ -20,7 +21,7 @@ use OAuthServer\Bridge\UserFinderByUserCredentialsInterface;
 class OAuthComponent extends Component implements UserFinderByUserCredentialsInterface
 {
     /**
-     * @var AuthorizationServer
+     * @var \League\OAuth2\Server\AuthorizationServer
      */
     protected $Server;
 
@@ -95,7 +96,7 @@ class OAuthComponent extends Component implements UserFinderByUserCredentialsInt
     }
 
     /**
-     * @return AuthorizationServer
+     * @return \League\OAuth2\Server\AuthorizationServer
      */
     public function getServer(): AuthorizationServer
     {
@@ -112,7 +113,7 @@ class OAuthComponent extends Component implements UserFinderByUserCredentialsInt
     }
 
     /**
-     * @param AuthorizationServer $Server a AuthorizationServer instance.
+     * @param \League\OAuth2\Server\AuthorizationServer $Server a AuthorizationServer instance.
      * @return void
      */
     public function setServer(AuthorizationServer $Server): void
@@ -121,7 +122,7 @@ class OAuthComponent extends Component implements UserFinderByUserCredentialsInt
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function findUser($username, $password): ?EntityInterface
     {
@@ -142,7 +143,7 @@ class OAuthComponent extends Component implements UserFinderByUserCredentialsInt
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getPrimaryKey()
     {
@@ -150,7 +151,7 @@ class OAuthComponent extends Component implements UserFinderByUserCredentialsInt
     }
 
     /**
-     * @return BaseAuthenticate
+     * @return \Cake\Auth\BaseAuthenticate
      */
     protected function getPasswordAuthenticator(): BaseAuthenticate
     {
@@ -171,7 +172,7 @@ class OAuthComponent extends Component implements UserFinderByUserCredentialsInt
     }
 
     /**
-     * @return Table
+     * @return \Cake\ORM\Table
      */
     protected function getUserModel(): Table
     {

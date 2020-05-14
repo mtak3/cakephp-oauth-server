@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace TestApp;
 
@@ -8,7 +9,7 @@ use Cake\Routing\Middleware\RoutingMiddleware;
 class Application extends BaseApplication
 {
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function middleware($middleware)
     {

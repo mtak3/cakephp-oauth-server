@@ -1,10 +1,10 @@
 <?php
+declare(strict_types=1);
 
 use Cake\Core\ClassLoader;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Datasource\ConnectionManager;
-use Cake\Routing\DispatcherFactory;
 
 $findRoot = function ($root) {
     do {

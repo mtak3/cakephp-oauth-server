@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace OAuthServer\Test\TestCase\Bridge\Repository;
 
@@ -7,7 +8,6 @@ use OAuthServer\Bridge\Entity\User;
 use OAuthServer\Bridge\Repository\UserRepository;
 use OAuthServer\Bridge\UserFinderByUserCredentialsInterface;
 use OAuthServer\Model\Entity\Client;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class UserRepositoryTest extends TestCase

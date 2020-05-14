@@ -1,12 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace OAuthServer\Test\TestCase\Model\Table;
 
 use Cake\I18n\FrozenTime;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
-use OAuthServer\Model\Table\AccessTokensTable;
-use OAuthServer\Model\Table\RefreshTokensTable;
 
 class RefreshTokensTableTest extends TestCase
 {
