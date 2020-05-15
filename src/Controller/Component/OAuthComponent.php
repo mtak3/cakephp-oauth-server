@@ -129,11 +129,11 @@ class OAuthComponent extends Component implements UserFinderByUserCredentialsInt
         $controller = $this->_registry->getController();
         $auth = $this->getPasswordAuthenticator();
 
-        $request = $controller->request
+        $request = $controller->getRequest()
             ->withData($auth->getConfig('fields.username'), $username)
             ->withData($auth->getConfig('fields.password'), $password);
 
-        $user = $auth->authenticate($request, $controller->response);
+        $user = $auth->authenticate($request, $controller->getResponse());
 
         if ($user === false) {
             return null;
