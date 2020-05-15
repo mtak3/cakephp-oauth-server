@@ -4,6 +4,7 @@ declare(strict_types=1);
 use Cake\Core\ClassLoader;
 use Cake\Core\Configure;
 use Cake\Datasource\ConnectionManager;
+use Cake\Utility\Security;
 
 $findRoot = function ($root) {
     do {
@@ -35,6 +36,7 @@ Configure::write('debug', true);
 Configure::write('App', [
     'namespace' => 'TestApp',
     'base' => '',
+    'encoding' => 'UTF-8',
     'paths' => [
         'plugins' => [ROOT . 'Plugin' . DS],
         'templates' => [ROOT . 'templates' . DS],
@@ -77,5 +79,6 @@ if (version_compare(Configure::version(), '3.6.0', '>=')) {
     error_reporting(E_ALL ^ E_USER_DEPRECATED);
 }
 
+Security::setSalt('test');
 
 error_reporting(E_ALL);
