@@ -143,7 +143,7 @@ class OAuthController extends AppController
         $user = $this->Auth->user();
 
         $this->set(compact('authParams', 'user'));
-        $this->set('__serialize', ['authParams', 'user']);
+        $this->viewBuilder()->setOption('serialize', ['authParams', 'user']);
     }
 
     /**

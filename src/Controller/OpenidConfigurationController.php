@@ -68,7 +68,7 @@ class OpenidConfigurationController extends Controller
         $data = (array)$data;
 
         $this->set($data);
-        $this->set('_serialize', array_keys($data));
+        $this->viewBuilder()->setOption('serialize', array_keys($data));
     }
 
     /**
@@ -103,7 +103,7 @@ class OpenidConfigurationController extends Controller
         $keys = (array)$keys;
 
         $this->set('keys', $keys);
-        $this->set('_serialize', ['keys']);
+        $this->viewBuilder()->setOption('serialize', ['keys']);
     }
 
     /**
