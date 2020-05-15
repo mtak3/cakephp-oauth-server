@@ -42,6 +42,7 @@
     ],
     "scripts": {
         "cs-check": "phpcs --colors -ps --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP --ignore=config/Migrations/* ./src ./tests ./config",
-        "cs-fix": "phpcbf -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP --ignore=config/Migrations/* ./src ./tests ./config"
+        "cs-fix": "phpcbf -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP --ignore=config/Migrations/* ./src ./tests ./config",
+        "test": "phpunit"
     }
 }
