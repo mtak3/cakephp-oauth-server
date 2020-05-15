@@ -38,7 +38,7 @@ Configure::write('App', [
     'base' => '',
     'paths' => [
         'plugins' => [ROOT . 'Plugin' . DS],
-        'templates' => [ROOT . 'Template' . DS],
+        'templates' => [ROOT . 'templates' . DS],
     ],
 ]);
 Cake\Cache\Cache::setConfig([
