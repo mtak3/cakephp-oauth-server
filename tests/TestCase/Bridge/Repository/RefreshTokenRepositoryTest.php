@@ -31,14 +31,14 @@ class RefreshTokenRepositoryTest extends TestCase
      */
     private $RefreshTokens;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->repository = new RefreshTokenRepository();
         $this->RefreshTokens = TableRegistry::getTableLocator()->get('OAuthServer.RefreshTokens');
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->repository, $this->clientRepository, $this->scopeRepository, $this->RefreshTokens);
         FrozenTime::setTestNow();

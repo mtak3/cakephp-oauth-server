@@ -43,7 +43,7 @@ class AccessTokenRepositoryTest extends TestCase
      */
     private $AccessTokens;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->repository = new AccessTokenRepository();
@@ -52,7 +52,7 @@ class AccessTokenRepositoryTest extends TestCase
         $this->AccessTokens = TableRegistry::getTableLocator()->get('OAuthServer.AccessTokens');
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->repository, $this->clientRepository, $this->scopeRepository, $this->AccessTokens);
         FrozenTime::setTestNow();

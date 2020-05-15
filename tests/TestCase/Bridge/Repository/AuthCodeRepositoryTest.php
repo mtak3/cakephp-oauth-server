@@ -43,7 +43,7 @@ class AuthCodeRepositoryTest extends TestCase
      */
     private $AuthCodes;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->repository = new AuthCodeRepository();
@@ -52,7 +52,7 @@ class AuthCodeRepositoryTest extends TestCase
         $this->AuthCodes = TableRegistry::getTableLocator()->get('OAuthServer.AuthCodes');
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->repository, $this->clientRepository, $this->scopeRepository, $this->AuthCodes);
         FrozenTime::setTestNow();

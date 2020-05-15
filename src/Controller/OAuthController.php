@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace OAuthServer\Controller;
 
 use Cake\Core\Configure;
-use Cake\Event\Event;
+use Cake\Event\EventInterface;
 use Cake\Http\Exception\HttpException;
 use Cake\Http\Response;
 use League\OAuth2\Server\Exception\OAuthServerException;
@@ -52,10 +52,10 @@ class OAuthController extends AppController
     /**
      * on Controller.initialize
      *
-     * @param \Cake\Event\Event $event the event
+     * @param \Cake\Event\EventInterface $event the event
      * @return \Cake\Http\Response|null
      */
-    public function beforeFilter(Event $event): ?Response
+    public function beforeFilter(EventInterface $event): ?Response
     {
         // if prompt=login on authorize action, then logout and remove prompt params
         if (

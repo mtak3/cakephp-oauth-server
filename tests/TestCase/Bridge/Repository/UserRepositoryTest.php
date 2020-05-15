@@ -22,14 +22,14 @@ class UserRepositoryTest extends TestCase
      */
     private $repository;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->finder = $this->getMockBuilder(UserFinderByUserCredentialsInterface::class)->getMock();
         $this->repository = new UserRepository($this->finder);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->repository, $this->finder);
         parent::tearDown();

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace OAuthServer\Model\Table;
 
-use Cake\Database\Schema\TableSchema;
+use Cake\Database\Schema\TableSchemaInterface;
 use Cake\Event\Event;
 use Cake\ORM\Table;
 use Cake\Utility\Security;
@@ -42,7 +42,7 @@ class OauthClientsTable extends Table
     /**
      * @inheritDoc
      */
-    protected function _initializeSchema(TableSchema $schema): TableSchema
+    protected function _initializeSchema(TableSchemaInterface $schema): TableSchemaInterface
     {
         $schema->setColumnType('redirect_uri', 'json');
         $schema->setColumnType('grant_types', 'json');

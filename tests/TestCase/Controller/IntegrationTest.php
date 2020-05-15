@@ -55,7 +55,7 @@ class IntegrationTest extends IntegrationTestCase
      * @noinspection PhpIncludeInspection
      * @noinspection PhpUnhandledExceptionInspection
      */
-    public function setUp()
+    public function setUp(): void
     {
         // class Router needs to be loaded in order for TestCase to automatically include routes
         // not really sure how to do it properly, this hotfix seems good enough
@@ -83,7 +83,7 @@ class IntegrationTest extends IntegrationTestCase
         ]);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->AccessTokens, $this->RefreshTokens, $this->AuthCodes);
         parent::tearDown();

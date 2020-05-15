@@ -8,7 +8,7 @@ use Cake\Controller\Controller;
 
 class TestAppController extends Controller
 {
-    public function initialize()
+    public function initialize(): void
     {
         $this->loadComponent('Auth', [
             'authenticate' => [

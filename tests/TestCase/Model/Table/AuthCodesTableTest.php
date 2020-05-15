@@ -22,14 +22,14 @@ class AuthCodesTableTest extends TestCase
      */
     private $AuthCodes;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->AuthCodes = TableRegistry::getTableLocator()->get('OAuthServer.AuthCodes');
         FrozenTime::setTestNow('2020-01-01 01:00:00');
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->AuthCodes);
         FrozenTime::setTestNow();

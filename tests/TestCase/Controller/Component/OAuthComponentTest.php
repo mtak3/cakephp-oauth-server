@@ -41,7 +41,7 @@ class OAuthComponentTest extends TestCase
      */
     private $controller;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->controller = new Controller(new ServerRequest(), new Response());
@@ -61,7 +61,7 @@ class OAuthComponentTest extends TestCase
         $this->component = new OAuthComponent($this->componentRegistry, Configure::read('OAuthServer', []));
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->component, $this->componentRegistry);
         parent::tearDown();

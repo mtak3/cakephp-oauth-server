@@ -24,7 +24,7 @@ class UsersFixture extends TestFixture
         ],
     ];
 
-    public function init()
+    public function init(): void
     {
         $hasher = new DefaultPasswordHasher();
 

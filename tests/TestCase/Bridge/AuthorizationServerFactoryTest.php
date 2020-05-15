@@ -22,7 +22,7 @@ class AuthorizationServerFactoryTest extends TestCase
      */
     private $key;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->privateKeyPath = Plugin::path('OAuthServer') . 'tests/Fixture/test.pem';

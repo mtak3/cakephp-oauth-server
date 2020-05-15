@@ -17,12 +17,12 @@ class OauthClientsTableTest extends TestCase
      */
     private $Clients;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->Clients = TableRegistry::getTableLocator()->get('OAuthServer.OauthClients');
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->Clients);
         parent::tearDown();
