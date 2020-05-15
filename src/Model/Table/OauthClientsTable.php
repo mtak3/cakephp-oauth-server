@@ -60,7 +60,7 @@ class OauthClientsTable extends Table
         $validator
             ->requirePresence('name', 'create')
             ->maxLength('name', 200)
-            ->notEmpty('name');
+            ->notEmptyString('name');
 
         $validator
             ->requirePresence('redirect_uri', 'create')
@@ -85,7 +85,7 @@ class OauthClientsTable extends Table
 
         $validator
             ->isArray('grant_types')
-            ->allowEmpty('grant_types')
+            ->allowEmptyString('grant_types')
             ->add('grant_types', 'allowed', [
                 'rule' => static function ($check) {
                     $check = (array)$check;

@@ -51,7 +51,7 @@ class OauthScopesTable extends Table
             ->requirePresence('id', 'create');
         $validator
             ->maxLength('description', 200)
-            ->allowEmpty('description');
+            ->allowEmptyString('description');
 
         return $validator;
     }
