@@ -46,7 +46,9 @@ trait TokenEntityTrait
      */
     public function getScopes()
     {
-        return $this->scopes;
+        return collection($this->scopes ?? [])->extract(static function ($scope) {
+            return $scope->getIdentifier();
+        })->toList();
     }
 
     /**
@@ -58,5 +60,13 @@ trait TokenEntityTrait
             $this->scopes = [];
         }
         $this->scopes[] = $scope;
+    }
+
+    /**
+     * @return \OAuthServer\Model\Entity\Scope[]
+     */
+    public function getRawScopes()
+    {
+        return $this->scopes;
     }
 }

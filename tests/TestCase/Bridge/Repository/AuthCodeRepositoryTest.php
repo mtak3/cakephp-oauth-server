@@ -86,7 +86,8 @@ class AuthCodeRepositoryTest extends TestCase
         $this->assertSame('TEST', $saved->getClient()->getIdentifier());
         $this->assertSame('user1', $saved->getUserIdentifier());
         $this->assertSame('https://example.com', $saved->getRedirectUri());
-        $this->assertSame(['test'], collection($saved->getScopes())->extract(static function (Scope $scope) {
+        $this->assertSame(['test'], $saved->getScopes());
+        $this->assertSame(['test'], collection($saved->getRawScopes())->extract(static function (Scope $scope) {
             return $scope->getIdentifier();
         })->toList());
     }

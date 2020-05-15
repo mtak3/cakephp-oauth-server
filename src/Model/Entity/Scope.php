@@ -29,12 +29,4 @@ class Scope extends Entity implements ScopeEntityInterface
     {
         return $this->getIdentifier();
     }
-
-    /**
-     * @return array|mixed|string
-     */
-    public function jsonSerialize()
-    {
-        return (string)$this;
-    }
 }

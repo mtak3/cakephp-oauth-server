@@ -60,7 +60,7 @@ class AccessTokenRepository implements AccessTokenRepositoryInterface
                 'expires' => $accessTokenEntity->getExpiryDateTime()->getTimestamp(),
                 'scopes' => [],
             ];
-            foreach ($accessTokenEntity->getScopes() as $scope) {
+            foreach ($accessTokenEntity->getRawScopes() as $scope) {
                 $data['scopes'][] = ['id' => $scope->getIdentifier()];
             }
             $accessTokenEntity = $this->table->newEntity($data);

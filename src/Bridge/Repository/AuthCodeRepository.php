@@ -53,7 +53,7 @@ class AuthCodeRepository implements AuthCodeRepositoryInterface
                 'expires' => $authCodeEntity->getExpiryDateTime()->getTimestamp(),
                 'scopes' => [],
             ];
-            foreach ($authCodeEntity->getScopes() as $scope) {
+            foreach ($authCodeEntity->getRawScopes() as $scope) {
                 $data['scopes'][] = ['id' => $scope->getIdentifier()];
             }
             $authCodeEntity = $this->table->newEntity($data);
