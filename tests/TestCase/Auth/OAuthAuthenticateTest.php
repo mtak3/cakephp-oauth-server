@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace OAuthServer\Test\TestCase\Auth;
 
 use Cake\Controller\ComponentRegistry;
-use Cake\Core\Plugin;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\I18n\FrozenTime;
@@ -14,6 +13,7 @@ use League\OAuth2\Server\CryptKey;
 use OAuthServer\Auth\OAuthAuthenticate;
 use OAuthServer\Model\Entity\AccessToken;
 use OAuthServer\Model\Entity\Client;
+use OAuthServer\Plugin as OAuthServerPlugin;
 
 class OAuthAuthenticateTest extends TestCase
 {
@@ -58,8 +58,10 @@ class OAuthAuthenticateTest extends TestCase
     {
         parent::setUp();
 
-        $this->privateKeyPath = Plugin::path('OAuthServer') . 'tests/Fixture/test.pem';
-        $this->publicKeyPath = Plugin::path('OAuthServer') . 'tests/Fixture/test-pub.pem';
+        $OAuthServerPlugin = new OAuthServerPlugin();
+
+        $this->privateKeyPath = $OAuthServerPlugin->getPath() . 'tests/Fixture/test.pem';
+        $this->publicKeyPath = $OAuthServerPlugin->getPath() . 'tests/Fixture/test-pub.pem';
 
         $this->Collection = $this->getMockBuilder(ComponentRegistry::class)->getMock();
         $this->response = $this->getMockBuilder(Response::class)->getMock();

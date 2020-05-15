@@ -5,7 +5,6 @@ namespace OAuthServer\Test\TestCase\Controller;
 
 use Cake\Controller\ComponentRegistry;
 use Cake\Core\Configure;
-use Cake\Core\Plugin;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\ORM\TableRegistry;
@@ -15,6 +14,7 @@ use Cake\TestSuite\IntegrationTestCase;
 use Defuse\Crypto\Key;
 use League\OAuth2\Server\CryptTrait;
 use OAuthServer\Auth\OAuthAuthenticate;
+use OAuthServer\Plugin as OAuthServerPlugin;
 
 class IntegrationTest extends IntegrationTestCase
 {
@@ -65,9 +65,11 @@ class IntegrationTest extends IntegrationTestCase
 
         Router::connect('/');
         Router::scope('/', static function (RouteBuilder $route) {
+            $OAuthServerPlugin = new OAuthServerPlugin();
+            $OAuthServerPlugin->routes($route);
+
             $route->fallbacks();
         });
-        include Plugin::configPath('OAuthServer') . 'routes.php';
 
         $this->AccessTokens = TableRegistry::getTableLocator()->get('OAuthServer.AccessTokens');
         $this->RefreshTokens = TableRegistry::getTableLocator()->get('OAuthServer.RefreshTokens');

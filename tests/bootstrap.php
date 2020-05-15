@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 use Cake\Core\ClassLoader;
 use Cake\Core\Configure;
-use Cake\Core\Plugin;
 use Cake\Datasource\ConnectionManager;
 
 $findRoot = function ($root) {
@@ -78,6 +77,5 @@ if (version_compare(Configure::version(), '3.6.0', '>=')) {
     error_reporting(E_ALL ^ E_USER_DEPRECATED);
 }
 
-Plugin::load('OAuthServer', ['path' => $root . DS, 'bootstrap' => true, 'route' => true]);
 
 error_reporting(E_ALL);

@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace OAuthServer\Test\TestCase\Controller;
 
 use Cake\Core\Configure;
-use Cake\Core\Plugin;
 use Cake\Http\ServerRequest;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\TestSuite\IntegrationTestCase;
 use OAuthServer\Controller\OAuthController;
+use OAuthServer\Plugin as OAuthServerPlugin;
 use TestApp\Controller\TestAppController;
 
 class OAuthControllerTest extends IntegrationTestCase
@@ -38,9 +38,11 @@ class OAuthControllerTest extends IntegrationTestCase
 
         Router::connect('/');
         Router::scope('/', static function (RouteBuilder $route) {
+            $OAuthServerPlugin = new OAuthServerPlugin();
+            $OAuthServerPlugin->routes($route);
+
             $route->fallbacks();
         });
-        include Plugin::configPath('OAuthServer') . 'routes.php';
     }
 
     public function tearDown(): void

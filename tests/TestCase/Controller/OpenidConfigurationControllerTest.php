@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace OAuthServer\Test\TestCase\Controller;
 
-use Cake\Core\Plugin;
 use Cake\Http\ServerRequest;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\TestSuite\IntegrationTestCase;
+use OAuthServer\Plugin as OAuthServerPlugin;
 
 class OpenidConfigurationControllerTest extends IntegrationTestCase
 {
@@ -27,9 +27,11 @@ class OpenidConfigurationControllerTest extends IntegrationTestCase
 
         Router::connect('/');
         Router::scope('/', static function (RouteBuilder $route) {
+            $OAuthServerPlugin = new OAuthServerPlugin();
+            $OAuthServerPlugin->routes($route);
+
             $route->fallbacks();
         });
-        include Plugin::configPath('OAuthServer') . 'routes.php';
 
         Router::fullBaseUrl('http://issuer.example.com');
     }
