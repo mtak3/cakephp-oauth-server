@@ -94,14 +94,14 @@ class OAuthAuthenticateTest extends TestCase
 
     public function testAuthenticateWithoutBear()
     {
-        $request = new ServerRequest('posts/index');
+        $request = new ServerRequest(['url' => 'posts/index']);
 
         $this->assertFalse($this->auth->authenticate($request, $this->response));
     }
 
     public function testUnauthenticatedWithContinue()
     {
-        $request = new ServerRequest('posts/index');
+        $request = new ServerRequest(['url' => 'posts/index']);
 
         $this->auth->setConfig('continue', true);
 

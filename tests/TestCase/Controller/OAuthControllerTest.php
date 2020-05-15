@@ -58,7 +58,7 @@ class OAuthControllerTest extends IntegrationTestCase
 
     public function testAssertRoute()
     {
-        $parsed = Router::parseRequest(new ServerRequest('/oauth'));
+        $parsed = Router::parseRequest(new ServerRequest(['url' => '/oauth']));
         $this->assertEquals([
             'controller' => 'OAuth',
             'action' => 'oauth',
@@ -67,7 +67,7 @@ class OAuthControllerTest extends IntegrationTestCase
             '_matchedRoute' => '/oauth',
         ], $parsed);
 
-        $parsed = Router::parseRequest(new ServerRequest('/oauth/authorize'));
+        $parsed = Router::parseRequest(new ServerRequest(['url' => '/oauth/authorize']));
         $this->assertEquals([
             'controller' => 'OAuth',
             'action' => 'authorize',
@@ -76,7 +76,7 @@ class OAuthControllerTest extends IntegrationTestCase
             '_matchedRoute' => '/oauth/authorize',
         ], $parsed);
 
-        $parsed = Router::parseRequest(new ServerRequest('/oauth/access_token'));
+        $parsed = Router::parseRequest(new ServerRequest(['url' => '/oauth/access_token']));
         $this->assertEquals([
             'controller' => 'OAuth',
             'action' => 'accessToken',

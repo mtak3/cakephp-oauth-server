@@ -43,7 +43,7 @@ class OpenidConfigurationControllerTest extends IntegrationTestCase
 
     public function testAssertRoute()
     {
-        $parsed = Router::parseRequest(new ServerRequest('/.well-known/openid-configuration'));
+        $parsed = Router::parseRequest(new ServerRequest(['url' => '/.well-known/openid-configuration']));
         $this->assertEquals([
             'controller' => 'OpenidConfiguration',
             'action' => 'view',
@@ -52,7 +52,7 @@ class OpenidConfigurationControllerTest extends IntegrationTestCase
             '_matchedRoute' => '/.well-known/openid-configuration',
         ], $parsed);
 
-        $parsed = Router::parseRequest(new ServerRequest('/oauth/jwks.json'));
+        $parsed = Router::parseRequest(new ServerRequest(['url' => '/oauth/jwks.json']));
         $this->assertEquals([
             'controller' => 'OpenidConfiguration',
             'action' => 'jwks',
