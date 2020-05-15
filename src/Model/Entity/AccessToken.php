@@ -23,7 +23,9 @@ use OAuthServer\Bridge\Entity\TokenEntityTrait;
  */
 class AccessToken extends Entity implements AccessTokenEntityInterface
 {
-    use AccessTokenTrait;
+    use AccessTokenTrait {
+        __toString as AccessTokenTraitToString;
+    }
     use ExpiryDateTimeTrait;
     use TokenEntityTrait;
 
@@ -50,5 +52,17 @@ class AccessToken extends Entity implements AccessTokenEntityInterface
     public function setIdentifier($identifier)
     {
         $this->oauth_token = $identifier;
+    }
+
+    /**
+     * workaround method
+     *
+     * Fatal error: Declaration of League\OAuth2\Server\Entities\Traits\AccessTokenTrait::__toString() must be compatible with Cake\ORM\Entity::__toString(): string in
+     *
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->AccessTokenTraitToString();
     }
 }
