@@ -29,7 +29,6 @@ class OAuthController extends AppController
 
         $this->loadComponent('OAuthServer.OAuth', Configure::read('OAuthServer', []));
         $this->loadComponent('RequestHandler');
-        $this->RequestHandler->setConfig('enableBeforeRedirect', false);
 
         if (!$this->components()->has('Auth')) {
             throw new RuntimeException('OAuthServer requires Auth component to be loaded and properly configured');
@@ -40,11 +39,14 @@ class OAuthController extends AppController
 
         // if accessToken action, disable CsrfComponent|SecurityComponent
         if ($this->request->getParam('action') === 'accessToken') {
-            if ($this->components()->has('Csrf')) {
-                $this->components()->unload('Csrf');
-            }
+            // @deprecated 4.0.0 Use FormProtectionComponent instead, for form tampering protection
+            //   or HttpsEnforcerMiddleware to enforce use of HTTPS (SSL) for requests.
             if ($this->components()->has('Security')) {
                 $this->components()->unload('Security');
+            }
+            // @since 4.0.0
+            if ($this->components()->has('FormProtection')) {
+                $this->components()->unload('FormProtection');
             }
         }
     }
