@@ -3,13 +3,12 @@ declare(strict_types=1);
 
 namespace OAuthServer\Controller\Component;
 
-use Cake\Auth\BaseAuthenticate;
+use Authentication\AuthenticationServiceInterface;
+use Authentication\Authenticator\AuthenticatorInterface;
 use Cake\Controller\Component;
 use Cake\Datasource\EntityInterface;
 use Cake\Http\Exception\NotImplementedException;
 use Cake\ORM\Entity;
-use Cake\ORM\Table;
-use Cake\ORM\TableRegistry;
 use Cake\Utility\Inflector;
 use DateInterval;
 use InvalidArgumentException;
@@ -43,6 +42,7 @@ class OAuthComponent extends Component implements UserFinderByUserCredentialsInt
             'Password',
         ],
         'passwordAuthenticator' => 'Form',
+        'userIdentityPath' => 'id',
         'privateKey' => null,
         'encryptionKey' => null,
         'accessTokenTTL' => 'PT1H',
@@ -127,62 +127,64 @@ class OAuthComponent extends Component implements UserFinderByUserCredentialsInt
     public function findUser($username, $password): ?EntityInterface
     {
         $controller = $this->_registry->getController();
-        $auth = $this->getPasswordAuthenticator();
+        $authenticationService = $this->getAuthenticationService();
+        $authenticator = $this->getPasswordAuthenticator();
+
+        $uri = $controller->getRequest()->getUri();
+        $uri = $uri->withPath($authenticator->getConfig('loginUrl'));
 
         $request = $controller->getRequest()
-            ->withData($auth->getConfig('fields.username'), $username)
-            ->withData($auth->getConfig('fields.password'), $password);
+            ->withData($authenticator->getConfig('fields.username'), $username)
+            ->withData($authenticator->getConfig('fields.password'), $password)
+            ->withUri($uri);
 
-        $user = $auth->authenticate($request, $controller->getResponse());
+        $user = $authenticator->authenticate($request);
 
-        if ($user === false) {
+        if ($user->isValid() === false) {
             return null;
         }
 
-        return new Entity($user);
+        return new Entity($user->getData()->toArray());
     }
 
     /**
      * @inheritDoc
      */
-    public function getPrimaryKey()
+    public function getUserIdentityPath()
     {
-        return $this->getUserModel()->getPrimaryKey();
+        return $this->getConfig('userIdentityPath');
     }
 
     /**
-     * @return \Cake\Auth\BaseAuthenticate
+     * @return \OAuthServer\Controller\Component\Authentication\AuthenticationServiceInterface
      */
-    protected function getPasswordAuthenticator(): BaseAuthenticate
+    protected function getAuthenticationService(): AuthenticationServiceInterface
     {
         $controller = $this->_registry->getController();
+        $authenticationService = $controller->getRequest()->getAttribute('authentication');
 
-        if (!$controller->Auth) {
-            throw new InvalidArgumentException(__('OAuthComponent require AuthComponent.'));
+        if (!$authenticationService) {
+            throw new InvalidArgumentException(
+                __('OAuthComponent require \Cake\Authentication\AuthenticationService.')
+            );
         }
 
-        $controller->Auth->constructAuthenticate();
-        $auth = $controller->Auth->getAuthenticate($this->getConfig('passwordAuthenticator'));
+        return $authenticationService;
+    }
 
-        if ($auth === null) {
+    /**
+     * @return \Authentication\Authenticator\AuthenticatorInterface
+     */
+    protected function getPasswordAuthenticator(): AuthenticatorInterface
+    {
+        $authenticationService = $this->getAuthenticationService();
+
+        $authenticator = $authenticationService->authenticators()->get($this->getConfig('passwordAuthenticator'));
+
+        if (!$authenticator) {
             throw new InvalidArgumentException(__('Can\'t get PasswordAuthenticator.'));
         }
 
-        return $auth;
-    }
-
-    /**
-     * @return \Cake\ORM\Table
-     */
-    protected function getUserModel(): Table
-    {
-        $auth = $this->getPasswordAuthenticator();
-        $userModel = $auth->getConfig('userModel');
-
-        if ($userModel === null) {
-            throw new InvalidArgumentException(__('UserModel not set.'));
-        }
-
-        return TableRegistry::getTableLocator()->get($userModel);
+        return $authenticator;
     }
 }

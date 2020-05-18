@@ -40,7 +40,7 @@ class UserRepository implements UserRepositoryInterface
     ) {
         $user = $this->finder->findUser($username, $password);
 
-        return $user ? new User($user->get($this->finder->getPrimaryKey())) : null;
+        return $user ? new User($user->get($this->finder->getUserIdentityPath())) : null;
     }
 
     /**

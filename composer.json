@@ -8,7 +8,8 @@
         "ext-json": "*",
         "ext-openssl": "*",
         "cakephp/cakephp": "^4.0",
-        "league/oauth2-server": "~8.0.0"
+        "league/oauth2-server": "~8.0.0",
+        "cakephp/authentication": "^2.3"
     },
     "require-dev": {
         "phpunit/phpunit": "~8.5.0",

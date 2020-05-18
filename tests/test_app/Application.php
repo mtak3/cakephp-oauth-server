@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace TestApp;
 
+use Authentication\Middleware\AuthenticationMiddleware;
 use Cake\Http\BaseApplication;
 use Cake\Http\MiddlewareQueue;
 use Cake\Routing\Middleware\RoutingMiddleware;
@@ -22,10 +23,14 @@ class Application extends BaseApplication
     /**
      * @inheritDoc
      */
-    public function middleware($middleware): MiddlewareQueue
+    public function middleware($middlewareQueue): MiddlewareQueue
     {
-        $middleware->add(new RoutingMiddleware($this));
+        $authenticationServiceProvider = new AuthenticationServiceProvider();
 
-        return $middleware;
+        $middlewareQueue->add(new AuthenticationMiddleware($authenticationServiceProvider));
+
+        $middlewareQueue->add(new RoutingMiddleware($this));
+
+        return $middlewareQueue;
     }
 }

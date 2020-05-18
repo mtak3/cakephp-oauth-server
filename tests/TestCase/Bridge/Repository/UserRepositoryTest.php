@@ -50,7 +50,7 @@ class UserRepositoryTest extends TestCase
 
         $this->finder
             ->expects($this->once())
-            ->method('getPrimaryKey')
+            ->method('getUserIdentityPath')
             ->willReturn('id');
 
         $result = $this->repository->getUserEntityByUserCredentials($username, $password, $grantType, $client);
