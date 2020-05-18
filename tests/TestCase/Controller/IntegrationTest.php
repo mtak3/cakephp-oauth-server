@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace OAuthServer\Test\TestCase\Controller;
 
-use Cake\Controller\ComponentRegistry;
+use Authentication\Authenticator\ResultInterface;
 use Cake\Core\Configure;
-use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
@@ -14,7 +13,8 @@ use Cake\Routing\Router;
 use Cake\TestSuite\IntegrationTestCase;
 use Defuse\Crypto\Key;
 use League\OAuth2\Server\CryptTrait;
-use OAuthServer\Auth\OAuthAuthenticate;
+use OAuthServer\Authenticator\OAuthAuthenticator;
+use OAuthServer\Identifier\OAuthIdentifier;
 use OAuthServer\Plugin as OAuthServerPlugin;
 use TestApp\AuthenticationServiceProvider;
 
@@ -81,10 +81,12 @@ class IntegrationTest extends IntegrationTestCase
 
         $componentRegistry = $this->getMockBuilder(ComponentRegistry::class)->getMock();
 
-        $this->auth = new OAuthAuthenticate($componentRegistry, [
-            'userModel' => 'Users',
-            'publicKey' => Configure::read('OAuthServer.publicKey'),
-        ]);
+        $this->auth = new OAuthAuthenticator(
+            new OAuthIdentifier(),
+            [
+                'publicKey' => Configure::read('OAuthServer.publicKey'),
+            ]
+        );
     }
 
     public function tearDown(): void
@@ -188,11 +190,14 @@ class IntegrationTest extends IntegrationTestCase
 
         // --- Test authorization with access token
         $request = (new ServerRequest())->withHeader('Authorization', sprintf('Bearer %s', $refreshed['access_token']));
-        $authResult = $this->auth->authenticate($request, new Response());
-        $this->assertSame('Alice', $authResult['name']);
+        $authResult = $this->auth->authenticate($request);
+        $this->assertInstanceOf(ResultInterface::class, $authResult);
+        $this->assertSame('Alice', $authResult->getData()->name);
         // Can't authorization with previous token
         $request = (new ServerRequest())->withHeader('Authorization', sprintf('Bearer %s', $response['access_token']));
-        $this->assertFalse($this->auth->authenticate($request, new Response()));
+        $authResult = $this->auth->authenticate($request);
+        $this->assertInstanceOf(ResultInterface::class, $this->auth->authenticate($request));
+        $this->assertFalse($authResult->isValid());
     }
 
     private function grabResponseJson()

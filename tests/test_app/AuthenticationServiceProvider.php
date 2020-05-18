@@ -38,6 +38,9 @@ class AuthenticationServiceProvider implements AuthenticationServiceProviderInte
             'loginUrl' => '/users/login',
         ]);
 
+        // OAuth authenticator
+        $service->loadAuthenticator('OAuthServer.OAuth');
+
         // Load identifiers
         $service->loadIdentifier('Authentication.Password', [
             'fields' => $fields,
@@ -45,6 +48,9 @@ class AuthenticationServiceProvider implements AuthenticationServiceProviderInte
                 'className' => 'Authentication.Orm',
             ],
         ]);
+
+        // OAuth identifier
+        $service->loadIdentifier('OAuthServer.OAuth');
 
         return $service;
     }
