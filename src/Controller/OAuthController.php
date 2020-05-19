@@ -96,7 +96,7 @@ class OAuthController extends AppController
 
             $this->dispatchEvent('OAuthServer.beforeAuthorize', [$authRequest]);
 
-            $userId = $this->Authentication->getIdentityData($this->OAuth->getUserIdentityPath());
+            $userId = $this->Authentication->getIdentity()->getIdentifier();
             if ($userId) {
                 $authRequest->setUser(new User($userId));
             }
