@@ -25,6 +25,7 @@ class OAuthIdentifier extends AbstractIdentifier
             self::CREDENTIAL_OAUTH => 'id',
         ],
         'resolver' => 'Authentication.Orm',
+        'oauthIdentityKey' => '_oauth',
     ];
 
     /**
@@ -37,6 +38,10 @@ class OAuthIdentifier extends AbstractIdentifier
         }
 
         $identity = $this->_findIdentity($data[self::CREDENTIAL_OAUTH]);
+
+        if ($identity) {
+            $identity->set($this->getConfig('oauthIdentityKey'), $data['oauth']);
+        }
 
         return $identity;
     }

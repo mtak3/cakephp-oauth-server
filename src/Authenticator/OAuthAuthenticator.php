@@ -80,6 +80,12 @@ class OAuthAuthenticator extends AbstractAuthenticator implements StatelessInter
         );
         $data = [
             OAuthIdentifier::CREDENTIAL_OAUTH => $userId,
+            'oauth' => [
+                'access_token_id' => $request->getAttribute('oauth_access_token_id'),
+                'user_id' => $request->getAttribute('oauth_user_id'),
+                'client_id' => $request->getAttribute('oauth_client_id'),
+                'scopes' => $request->getAttribute('oauth_scopes'),
+            ],
         ];
 
         $user = $this->_identifier->identify($data);
