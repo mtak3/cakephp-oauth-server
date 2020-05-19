@@ -31,7 +31,7 @@ class LogoutAction extends BaseAction
 
         $subject->set([
             'success' => true,
-            'redirectUrl' => $this->_controller()->Auth->logout(),
+            'redirectUrl' => $this->_controller()->Authentication->logout(),
         ]);
 
         $this->_trigger('afterLogout', $subject);
