@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace OAuthServer\Test\TestCase\Bridge\Repository;
 
@@ -16,13 +17,13 @@ class ClientRepositoryTest extends TestCase
      */
     private $repository;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->repository = new ClientRepository();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->repository);
         parent::tearDown();
@@ -50,15 +51,19 @@ class ClientRepositoryTest extends TestCase
     public function dataValidateClient()
     {
         return [
-            'valid: Client id only' => [
-                ['TEST', null, null],
+            'valid: Public Client id only' => [
+                ['Public', null, null],
                 true,
+            ],
+            'invalid: Confidential Client id only' => [
+                ['TEST', null, null],
+                false,
             ],
             'valid: Client id with secret' => [
                 ['TEST', 'TestSecret', null],
                 true,
             ],
-            'invalid: Client id only' => [
+            'invalid: Unregistered Client id only' => [
                 ['INVALID', null, null],
                 false,
             ],

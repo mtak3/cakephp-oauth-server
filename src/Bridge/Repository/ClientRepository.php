@@ -1,11 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace OAuthServer\Bridge\Repository;
 
 use Cake\Datasource\ModelAwareTrait;
 use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
-use OAuthServer\Model\Entity\Client;
-use OAuthServer\Model\Table\OauthClientsTable;
 
 /**
  * implemented ClientRepositoryInterface
@@ -15,7 +14,7 @@ class ClientRepository implements ClientRepositoryInterface
     use ModelAwareTrait;
 
     /**
-     * @var OauthClientsTable
+     * @var \OAuthServer\Model\Table\OauthClientsTable
      */
     private $table;
 
@@ -43,12 +42,10 @@ class ClientRepository implements ClientRepositoryInterface
         $conditions = [
             $this->table->getPrimaryKey() => $clientIdentifier,
         ];
-        if ($clientSecret !== null) {
-            $conditions[$this->table->aliasField('client_secret')] = $clientSecret;
-        }
+        $conditions[$this->table->aliasField('client_secret')] = (string)$clientSecret;
 
         $client = $this->table->find()->where($conditions)->first();
-        /* @var $client Client|null */
+        /** @var \OAuthServer\Bridge\Repository\Client|null $client */
 
         if ($client === null) {
             return false;

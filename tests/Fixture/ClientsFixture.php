@@ -26,7 +26,7 @@ class ClientsFixture extends TestFixture
         ],
     ];
 
-    public function init()
+    public function init(): void
     {
         $this->records[] = [
             'id' => 'TEST',
@@ -47,6 +47,18 @@ class ClientsFixture extends TestFixture
             'name' => 'Test',
             'redirect_uri' => json_encode(['http://www.example.com']),
             'grant_types' => json_encode([
+                'authorization_code',
+                'refresh_token',
+            ]),
+        ];
+
+        $this->records[] = [
+            'id' => 'Public',
+            'client_secret' => '',
+            'name' => 'Public Client',
+            'redirect_uri' => json_encode(['http://www.example.com']),
+            'grant_types' => json_encode([
+                'password',
                 'authorization_code',
                 'refresh_token',
             ]),
