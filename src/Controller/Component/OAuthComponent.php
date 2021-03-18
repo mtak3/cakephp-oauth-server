@@ -152,15 +152,7 @@ class OAuthComponent extends Component implements UserFinderByUserCredentialsInt
      */
     public function getUserIdentifier($identityData)
     {
-        return $identityData[$this->getUserIdentityPath()];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getUserIdentityPath()
-    {
-        return $this->getConfig('userIdentityPath');
+        return $identityData[$this->getConfig('userIdentityPath')];
     }
 
     /**

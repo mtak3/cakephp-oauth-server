@@ -23,11 +23,4 @@ interface UserFinderByUserCredentialsInterface
      * @return string|int|null
      */
     public function getUserIdentifier($identityData);
-
-    /**
-     * Get Users repository identity path
-     *
-     * @return string
-     */
-    public function getUserIdentityPath();
 }
