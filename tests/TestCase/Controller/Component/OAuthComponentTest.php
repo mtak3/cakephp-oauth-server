@@ -8,6 +8,7 @@ use Cake\Controller\Controller;
 use Cake\Core\Configure;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
+use Cake\ORM\Entity;
 use Cake\TestSuite\TestCase;
 use League\OAuth2\Server\AuthorizationServer;
 use OAuthServer\Controller\Component\OAuthComponent;
@@ -76,9 +77,9 @@ class OAuthComponentTest extends TestCase
         $this->assertSame(['Password', 'RefreshToken'], $component->getConfig('supportedGrants'));
     }
 
-    public function testGetUserIdentityPath()
+    public function testGetUserIdentifier()
     {
-        $this->assertSame('id', $this->component->getUserIdentityPath());
+        $this->assertSame('user1', $this->component->getUserIdentifier(new Entity(['id' => 'user1'])));
     }
 
     public function testFindUser()
