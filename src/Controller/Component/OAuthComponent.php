@@ -42,7 +42,7 @@ class OAuthComponent extends Component implements UserFinderByUserCredentialsInt
             'Password',
         ],
         'passwordAuthenticator' => 'Form',
-        'userIdentityPath' => 'id',
+        'userIdentifierField' => 'id',
         'privateKey' => null,
         'encryptionKey' => null,
         'accessTokenTTL' => 'PT1H',
@@ -150,9 +150,9 @@ class OAuthComponent extends Component implements UserFinderByUserCredentialsInt
     /**
      * @inheritDoc
      */
-    public function getUserIdentityPath()
+    public function getUserIdentifier($identityData)
     {
-        return $this->getConfig('userIdentityPath');
+        return $identityData[$this->getConfig('userIdentifierField')];
     }
 
     /**
